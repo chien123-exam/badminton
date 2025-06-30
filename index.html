@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Câu Lạc Bộ Cầu Lông Phoenix</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border-radius: 15px;
+            overflow: hidden;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .hero-section {
+            position: relative;
+            height: 400px;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400"><defs><linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%23FF6B6B;stop-opacity:1" /><stop offset="25%" style="stop-color:%234ECDC4;stop-opacity:1" /><stop offset="75%" style="stop-color:%2345B7D1;stop-opacity:1" /><stop offset="100%" style="stop-color:%2396CEB4;stop-opacity:1" /></linearGradient></defs><rect width="1200" height="400" fill="url(%23bg)"/><g opacity="0.1"><circle cx="200" cy="100" r="80" fill="white"/><circle cx="800" cy="150" r="60" fill="white"/><circle cx="1000" cy="80" r="40" fill="white"/><path d="M100,200 Q300,100 500,200 T900,200" stroke="white" stroke-width="3" fill="none"/><path d="M200,300 Q400,200 600,300 T1000,300" stroke="white" stroke-width="2" fill="none"/></g></svg>');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        /* Thêm phần để người dùng có thể thay đổi ảnh bìa */
+        .hero-image-placeholder {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.2);
+            padding: 10px 15px;
+            border-radius: 25px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .hero-image-placeholder:hover {
+            background: rgba(255,255,255,0.3);
+            transform: scale(1.05);
+        }
+
+        /* Tùy chỉnh để thay thế ảnh bìa */
+        .hero-section.custom-bg {
+            background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('YOUR_IMAGE_URL_HERE');
+        }
+
+        .hero-content {
+            text-align: center;
+            color: white;
+            z-index: 2;
+            padding: 20px;
+        }
+
+        .club-logo {
+            width: 120px;
+            height: 120px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+            border: 3px solid rgba(255,255,255,0.3);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .badminton-icon {
+            font-size: 60px;
+            transform: rotate(45deg);
+        }
+
+        .club-title {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .club-subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .decorative-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .shuttle-1, .shuttle-2, .shuttle-3 {
+            position: absolute;
+            color: rgba(255,255,255,0.1);
+            font-size: 80px;
+            animation: floatSlow 6s ease-in-out infinite;
+        }
+
+        .shuttle-1 {
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .shuttle-2 {
+            top: 20%;
+            right: 15%;
+            animation-delay: 2s;
+        }
+
+        .shuttle-3 {
+            bottom: 15%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .rules-section {
+            padding: 60px 40px;
+            background: linear-gradient(to bottom, #ffffff, #f8f9fa);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+            border-radius: 2px;
+        }
+
+        .announcement-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 40px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .announcement-header p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .announcement-header p:last-child {
+            margin-bottom: 0;
+        }
+
+        .rules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .rule-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-left: 5px solid;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .rule-card:nth-child(1) { border-left-color: #FF6B6B; }
+        .rule-card:nth-child(2) { border-left-color: #4ECDC4; }
+        .rule-card:nth-child(3) { border-left-color: #45B7D1; }
+        .rule-card:nth-child(4) { border-left-color: #96CEB4; }
+        .rule-card:nth-child(5) { border-left-color: #FFEAA7; }
+        .rule-card:nth-child(6) { border-left-color: #DDA0DD; }
+
+        .rule-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .rule-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, rgba(255,255,255,0.1), transparent);
+            transform: rotate(45deg) translate(20px, -20px);
+        }
+
+        .rule-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .rule-icon {
+            margin-right: 12px;
+            font-size: 1.5rem;
+        }
+
+        .rule-content {
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .rule-content ul {
+            padding-left: 20px;
+        }
+
+        .rule-content li {
+            margin-bottom: 8px;
+            position: relative;
+        }
+
+        .rule-content li::marker {
+            color: #4ECDC4;
+        }
+
+        .contact-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .contact-title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            font-size: 1.1rem;
+        }
+
+        .contact-icon {
+            margin-right: 10px;
+            font-size: 1.3rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero-section {
+                height: 300px;
+            }
+
+            .club-title {
+                font-size: 2rem;
+            }
+
+            .rules-section {
+                padding: 40px 20px;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+        .hero-section {
+    background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('./image.png');
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Hero Section với ảnh bìa -->
+        <div class="hero-section">
+            <div class="hero-image-placeholder" onclick="document.getElementById('imageInput').click()">
+                📷 Thay đổi ảnh bìa
+            </div>
+            <input type="file" id="imageInput" accept="image/*" style="display: none;" onchange="handleImageUpload(event)">
+            <div class="decorative-elements">
+                <div class="shuttle-1">🏸</div>
+                <div class="shuttle-2">🏸</div>
+                <div class="shuttle-3">🏸</div>
+            </div>
+            <div class="hero-content">
+                <div class="club-logo">
+                    <div class="badminton-icon">🏸</div>
+                </div>
+                <h1 class="club-title">PHOENIX CLUB</h1>
+                <p class="club-subtitle">Câu Lạc Bộ Cầu Lông Chuyên Nghiệp</p>
+            </div>
+        </div>
+
+        <!-- Phần nội quy -->
+        <div class="rules-section">
+            <div class="rules-grid">
+                <div class="rule-card">
+                    <h3 class="rule-title">
+                        <span class="rule-icon">📅</span>
+                        Thời Gian Hoạt Động
+                    </h3>
+                    <div class="rule-content">
+                        <p>Thời gian cố định <strong>thứ 3 – 7 hàng tuần</strong></p>
+                    </div>
+                </div>
+
+                <div class="rule-card">
+                    <h3 class="rule-title">
+                        <span class="rule-icon">✅</span>
+                        Nghĩa Vụ Báo Trước
+                    </h3>
+                    <div class="rule-content">
+                        <p>Tất cả thành viên đều phải có nghĩa vụ <strong>báo trước (vote)</strong> có tham gia buổi cầu hôm sau không</p>
+                    </div>
+                </div>
+
+                <div class="rule-card">
+                    <h3 class="rule-title">
+                        <span class="rule-icon">💰</span>
+                        Chi Phí
+                    </h3>
+                    <div class="rule-content">
+                        <ul>
+                            <li>Tất cả thành viên đều <strong>đóng tiền cầu cho 2 buổi cố định</strong></li>
+                            <li>Những buổi phát sinh có từ <strong>6 người trở lên</strong> sẽ tính phí</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="rule-card">
+                    <h3 class="rule-title">
+                        <span class="rule-icon">👥</span>
+                        Dẫn Khách
+                    </h3>
+                    <div class="rule-content">
+                        <ul>
+                            <li>Dẫn khách đến <strong>đồng giá 55k/người</strong></li>
+                            <li>Thành viên dẫn khách có trách nhiệm <strong>trả chi phí này</strong></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="rule-card">
+                    <h3 class="rule-title">
+                        <span class="rule-icon">⚠️</span>
+                        Quy Định Nghỉ
+                    </h3>
+                    <div class="rule-content">
+                        <p>Thành viên <strong>quá 3 buổi cố định liên tiếp không đi</strong> → <span style="color: #e74c3c; font-weight: bold;">OUT</span></p>
+                    </div>
+                </div>
+
+                <div class="rule-card">
+                    <h3 class="rule-title">
+                        <span class="rule-icon">📋</span>
+                        Trách Nhiệm Chung
+                    </h3>
+                    <div class="rule-content">
+                        <p>Mọi cá nhân thuộc phạm vi áp dụng có trách nhiệm <strong>đọc kỹ, hiểu rõ và nghiêm túc chấp hành</strong>.</p>
+                        <p>Trong quá trình thực hiện, nếu có bất kỳ vướng mắc hoặc đề xuất nào, vui lòng liên hệ nêu ý kiến.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="announcement-footer">
+                <p><strong>Trân trọng thông báo!</strong></p>
+            </div>
+        </div>
+
+        <!-- Phần liên hệ -->
+        <div class="contact-section">
+            <h2 class="contact-title">Liên Hệ</h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span class="contact-icon">📞</span>
+                    <span>0123.456.789</span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">📧</span>
+                    <span>phoenix.club@email.com</span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">📍</span>
+                    <span>123 Đường ABC, Quận XYZ, TP.HCM</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function handleImageUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const heroSection = document.querySelector('.hero-section');
+                    heroSection.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('${e.target.result}')`;
+                    heroSection.style.backgroundSize = 'cover';
+                    heroSection.style.backgroundPosition = 'center';
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Alternative: Sử dụng URL trực tiếp (cho ảnh online)
+        function changeBackgroundImageByURL() {
+            const imageUrl = prompt("Nhập URL ảnh bìa của bạn:");
+            if (imageUrl) {
+                const heroSection = document.querySelector('.hero-section');
+                heroSection.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('${imageUrl}')`;
+                heroSection.style.backgroundSize = 'cover';
+                heroSection.style.backgroundPosition = 'center';
+            }
+        }
+
+        // Thêm hiệu ứng parallax khi scroll
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const heroSection = document.querySelector('.hero-section');
+            const speed = scrolled * 0.5;
+            heroSection.style.transform = `translateY(${speed}px)`;
+        });
+    </script>
+</body>
+</html>
